@@ -1,8 +1,8 @@
 <div class="content">
-	<div  id="form_wrapper" class="form_wrapper" style="width: 550px; height: 463px; display: block;">
-		<form class="register active">
+	<div  id="form_wrapper" class="form_wrapper" style="width: 350px; height: 444px; display: block;">
+		<form class="register active" name="signupForm">
 			<h3>Register</h3>
-			<div class="column">
+			<!-- <div class="column">
 				<div>
 					<label>First Name:</label>
 					<input type="text" />
@@ -18,30 +18,41 @@
 					<input type="text" value="http://"/>
 					<span class="error">This is an error</span>
 				</div>
-			</div>
+			</div> -->
 			<div class="column">
 				<div>
 					<label>Username:</label>
-					<input type="text"/>
-					<span class="error">This is an error</span>
+					<input type="text" name="username"  ng-model="signupFormModel.username"/>
+					<!-- ng-required="true" ng-pattern="/^[a-zA-Z0-9_.]+$/"/"" ng-maxlength="signupFormModel.usernameMax" -->
+					<!-- <span class="error" ng-show="signupForm.username.$error.required && signupForm.username.$dirty">  Username cannot be empty </span>
+					<span class="error" ng-show="signupForm.username.$error.pattern && signupForm.username.$dirty">  Username contains invalid characters </span>
+					<span class="error" ng-show="signupForm.username.$error.maxlength && signupForm.username.$dirty">  Username length more than 20 chars </span> -->
+					<span class="error" ng-show="showEmptyUsernameError">Username cannot be empty</span> 
+					<span class="error" ng-show="showTooLongUsernameError">Username length more than 20 chars</span> 					
 				</div>
 				<div>
 					<label>Email:</label>
-					<input type="text" />
-					<span class="error">This is an error</span>
+					<input type="text" name="email"  ng-model="signupFormModel.email"/>
+					<span ng-show="showInvalidEmailError" class="error">Invalid email address</span>
 				</div>
 				<div>
 					<label>Password:</label>
-					<input type="password" />
-					<span class="error">This is an error</span>
+					<input type="password" name="password" ng-model="signupFormModel.password"/>
+					<span class="error" ng-show="showTooShortPasswordError">Password too short</span>
 				</div>
+				<div>
+					<label>Confirm Password:</label>
+					<input type="password" name="confirm_password" ng-model="signupFormModel.confirm_password"/>
+					<span ng-show="showPasswordsNotMatchError" class="error">Passwords not match</span>
+				</div>
+				<br>
 			</div>
 			<div class="bottom">
-				<div class="remember">
+				<!-- <div class="remember">
 					<input type="checkbox" />
 					<span>Send me updates</span>
-				</div>
-				<input type="submit" value="Register" />
+				</div> -->
+				<input type="submit" ng-click="signUp()" value="Register" />
 				<a href="/#/login" rel="login" class="linkform">You have an account already? Log in here</a>
 				<div class="clear"></div>
 			</div>
